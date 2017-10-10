@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.yexiaoxiaogo.SpringBlog.dao.BlogDao">
+	<resultMap id="BaseResultMap" type="io.github.yexiaoxiaogo.SpringBlog.domain.Blog">
+		<result column="blogid" property="blogid" />
+		<result column="userid" property="userid" />
+		<result column="title" property="title" />
+		<result column="blog" property="blog" />
+		<result column="date" property="date" />
+	</resultMap>
+	
+	<parameterMap id="Blog"
+		type="io.github.yexiaoxiaogo.SpringBlog.domain.Blog" />
+	<!-- 查询单条记录 -->
+	<select id="findBlogByID" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM blog WHERE blogid = #{blogid}
+	</select>
+	
+	<select id="selectALLByUserid" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM user WHERE userid = #{usernid}
+	</select>
+
+	<insert id="insertBlog" parameterMap="Blog">
+		insert into blog(blogid,userid,title,blog,date) 
+		values(#{blogid},#{userid},#{title},#{blog},#{date})
+	</insert>
+</mapper>

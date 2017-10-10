@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.yexiaoxiaogo.SpringBlog.dao.UserDao">
+	<resultMap id="BaseResultMap" type="io.github.yexiaoxiaogo.SpringBlog.domain.User">
+		<result column="userid" property="userid" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+	</resultMap>
+	
+	<parameterMap id="User"
+		type="io.github.yexiaoxiaogo.SpringBlog.domain.User" />
+	<!-- 查询单条记录 -->
+	<select id="checkUser" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM user WHERE username = #{username} AND password = #{password}
+	</select>
+	
+	<select id="findNameByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT username FROM user WHERE username = #{username}
+	</select>
+
+	<insert id="insertUser" parameterMap="User">
+		insert into user(userid,username,password) 
+		values(#{userid},#{username},#{password})
+	</insert>
+</mapper>
