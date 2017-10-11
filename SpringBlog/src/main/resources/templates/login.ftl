@@ -42,7 +42,7 @@
 				})
 				.then(function(r) {
 					alert('登录成功');
-					location.href = './listed';
+					location.href = './listed?page=1';
 				});
 		});
 	</script>
