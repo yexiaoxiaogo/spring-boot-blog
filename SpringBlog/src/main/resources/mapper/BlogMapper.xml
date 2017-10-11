@@ -18,11 +18,6 @@
 		SELECT * FROM blog WHERE blogid = #{blogid}
 	</select>
 	
-	<select id="selectALLByUserid" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
-		SELECT * FROM user WHERE userid = #{usernid}
-	</select>
-
 	<insert id="insertBlog" parameterMap="Blog">
 		insert into blog(blogid,userid,title,blog,date) 
 		values(#{blogid},#{userid},#{title},#{blog},#{date})
