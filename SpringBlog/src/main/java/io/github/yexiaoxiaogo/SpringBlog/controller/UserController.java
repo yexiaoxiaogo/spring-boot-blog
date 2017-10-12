@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,9 @@ public class UserController {
 		User user = userService.Login(username, password);
 		// login 返回的是一个 user对象，不是bool值
 		if (user != null) {
+			//设置session属性
+			request.getSession().setAttribute("user", user);
+			
 			modelAndView.addObject("user", user);
 			modelAndView.setViewName("listed");
 		} else {
@@ -48,6 +52,16 @@ public class UserController {
 		}
 
 		return modelAndView;
+	}
+	
+	//点击退出按钮，跳转到未登录页面
+	@RequestMapping("/loginout")
+	public String loginout(HttpServletRequest request){
+		//防止创建session
+		HttpSession httpSession = request.getSession(false);
+		//清除session返回到未登录主页面
+		httpSession.removeAttribute("user");
+		return "unlisted";
 	}
 
 	// 点击注册按钮，跳转到注册用户页面，注册后跳转到未登录主页面，进行登录
