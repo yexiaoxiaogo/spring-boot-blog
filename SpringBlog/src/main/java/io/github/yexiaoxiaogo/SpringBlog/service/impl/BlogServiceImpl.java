@@ -1,5 +1,7 @@
 package io.github.yexiaoxiaogo.SpringBlog.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class BlogServiceImpl {
 	public Long ReleaseBlog(Blog blog){
 		
 		return blogDao.insertBlog(blog);
+	}
+	//显示最新10条博客
+	public List<Blog> findnewblog(int blogid){
+		
+		return blogDao.findnewblog(blogid);
 	}
 
 

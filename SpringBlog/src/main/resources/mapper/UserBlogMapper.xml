@@ -11,9 +11,13 @@
 	</resultMap>
 
 	<!-- 查询列表 -->
-	<select id="findBlogListByUser" parameterType="java.lang.String"
+	<select id="selectALLByUserid" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
 		SELECT * FROM blog WHERE userid = #{userid}
+	</select>
+	
+	<select id="count">
+	SELECT COUNT(* ) FROM blog WHERE userid =#{userid}
 	</select>
 
 </mapper>

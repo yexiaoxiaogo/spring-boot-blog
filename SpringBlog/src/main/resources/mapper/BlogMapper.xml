@@ -18,6 +18,12 @@
 		SELECT * FROM blog WHERE blogid = #{blogid}
 	</select>
 	
+		<!-- 查询列表 -->
+	<select id="findnewblog" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM blog ORDER BY blogid DESC LIMIT 10
+	</select>
+	
 	<insert id="insertBlog" parameterMap="Blog">
 		insert into blog(blogid,userid,title,blog,date) 
 		values(#{blogid},#{userid},#{title},#{blog},#{date})

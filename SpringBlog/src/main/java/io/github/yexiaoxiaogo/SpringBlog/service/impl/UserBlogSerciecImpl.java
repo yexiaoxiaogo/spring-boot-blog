@@ -18,5 +18,11 @@ public class UserBlogSerciecImpl {
 		
 		return userBlogDao.selectALLByUserid(userid);
 	}
+	
+	//
+	public int count(int userid){
+		
+		return userBlogDao.count(userid);
+	}
 
 }
