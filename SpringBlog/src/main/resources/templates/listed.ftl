@@ -18,23 +18,29 @@
 <body>
 	<a href='./write'><h2>写文章</h2></a>
 	<ul>
-	<#list list as blog>
+	<#list results as blog>
 	   <li>
 	   		<a href='./paper?id=${blog.blogid}'>
-	   			<h3>${blog.title} <small>${blog.date?string("yyyy-MM-dd HH:mm:ss")}</small></h3>
+	   			<h3>${blog.title!"#暂无标题#"} <small>${blog.date?string("yyyy-MM-dd HH:mm:ss")}</small></h3>
 	   		</a>
-	   		<p>${blog.blog}</p>
+	   		
 	   </li> 
 	</#list>
 	</ul>
-	
+	<p>共${total}条数据</p>
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination">
-	    <li class="page-item"><a class="page-link" href="?page=0">1</a></li>
-	    <li class="page-item"><a class="page-link" href="?page=1">2</a></li>
-	    <li class="page-item"><a class="page-link" href="?page=2">3</a></li>
-	    <li class="page-item"><a class="page-link" href="?page=3">4</a></li>
-	    <li class="page-item"><a class="page-link" href="?page=4">5</a></li>
+	  	<#list 1..pages as i>
+	  		<#if i == page>
+		    	<li class="page-item active">
+		    		<a class="page-link" href="?page=${i}">${i}</a>
+		    	</li>
+	    	<#else>
+				<li class="page-item ">
+	    			<a class="page-link" href="?page=${i}">${i}</a>
+	    		</li>
+	    	</#if>
+	    </#list>
 	  </ul>
 	</nav>
 </body>

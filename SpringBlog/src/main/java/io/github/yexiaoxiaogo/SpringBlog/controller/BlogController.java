@@ -3,11 +3,14 @@ package io.github.yexiaoxiaogo.SpringBlog.controller;
 
 import static org.mockito.Matchers.intThat;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import io.github.yexiaoxiaogo.SpringBlog.domain.Blog;
 import io.github.yexiaoxiaogo.SpringBlog.domain.User;
+import io.github.yexiaoxiaogo.SpringBlog.domain.UserBlog;
 import io.github.yexiaoxiaogo.SpringBlog.service.BlogService;
 import io.github.yexiaoxiaogo.SpringBlog.service.UserBlogService;
 
@@ -54,11 +58,13 @@ public class BlogController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/listed")
+	@RequestMapping("/api/listed")
 	@ResponseBody
 	public Map<String , Object> paged(HttpServletRequest request){
 		//得到session信息
 	    HttpSession httpSession = request.getSession();
+	    ModelAndView modelAndView = new ModelAndView();
+	    
 	    User  user = (User) httpSession.getAttribute("user");
 	    int userid = user.getUserid();
 	    int page = 0;
@@ -86,7 +92,47 @@ public class BlogController {
 		result.put("user", user);
 		
 		return result;
-	//	return userblogService.pagedquery(user.getUserid(), offset);
+	}
+	
+	@RequestMapping("/listed")
+	public ModelAndView listedPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		//得到session信息
+	    HttpSession httpSession = request.getSession();
+	    ModelAndView modelAndView = new ModelAndView();
+	    
+	    User  user = (User) httpSession.getAttribute("user");
+	    if (user == null) {
+	    	response.sendRedirect("/login");
+	    	return null;
+	    }
+	    
+	    int userid = user.getUserid();
+	    int page = 0;
+	    int pagesize = 10;
+	
+		if(request.getParameter("page") != null){
+	    	  page = new Integer(request.getParameter("page"))-1;
+		}
+		
+	    if(request.getParameter("pagesize") != null){
+
+	    	 pagesize = new Integer(request.getParameter("pagesize"));
+		}
+	    
+		int offset = page *pagesize;
+		
+		Map<String, Object>  result = new HashMap<String, Object>();
+		
+		int count = userblogService.count(userid);
+	
+		List<UserBlog> userBlogs = userblogService.pagedquery(userid, offset, pagesize);
+		modelAndView.addObject("page", page+1);
+		modelAndView.addObject("pagesize", pagesize);
+		modelAndView.addObject("pages", Math.ceil(count / pagesize) + 1);
+		modelAndView.addObject("total", count);
+		modelAndView.addObject("results", userBlogs);
+		modelAndView.setViewName("listed");
+		return modelAndView;
 	}
 
 

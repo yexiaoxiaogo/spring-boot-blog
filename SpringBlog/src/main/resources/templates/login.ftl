@@ -16,9 +16,9 @@
 	</style>
 </head>
 <body>
-	<form>
+	<form action='/login'>
 		<div class='form-group'>
-			<input class="form-control" name="email" placeholder="请输入你的邮箱" />
+			<input class="form-control" name="username" placeholder="请输入你的账号" />
 		</div>
 		<div class='form-group'>
 			<input type='password' class="form-control" name="password" placeholder="请输入你的密码" />
@@ -30,21 +30,5 @@
 			<a class='' href='./register'>注册</a>
 		</div>
 	</form>
-	
-	<script>
-		$('form').on('submit', function(e) {
-			e.preventDefault();
-			e.stopPropagation()
-			
-			fetch('/test/api?' + $('form').serialize())
-				.then(function(r) {
-					return r.json();
-				})
-				.then(function(r) {
-					alert('登录成功');
-					location.href = './listed?page=1';
-				});
-		});
-	</script>
 </body>
 </html>

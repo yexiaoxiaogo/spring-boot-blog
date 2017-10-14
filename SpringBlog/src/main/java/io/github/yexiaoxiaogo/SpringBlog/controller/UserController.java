@@ -1,9 +1,11 @@
 package io.github.yexiaoxiaogo.SpringBlog.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,11 @@ public class UserController {
 	public String index(Model model) {
 		return "unlisted";
 	}
+	
 
 	// 点击登录按钮，跳转到登录页面,登录成功跳转到登录成功页面listed
 	@RequestMapping("/login")
-	public ModelAndView Login(HttpServletRequest request) {
+	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println("user:" + username + " pass:" + password);
@@ -44,11 +47,12 @@ public class UserController {
 			//设置session属性
 			request.getSession().setAttribute("user", user);
 			
-			modelAndView.addObject("user", user);
-			modelAndView.setViewName("listed");
+			response.sendRedirect("/listed");
+//			modelAndView.addObject("user", user);
+//			modelAndView.setViewName("listed");
 		} else {
 			System.out.println("user is null");
-			modelAndView.setViewName("error");
+			modelAndView.setViewName("login");
 		}
 
 		return modelAndView;
