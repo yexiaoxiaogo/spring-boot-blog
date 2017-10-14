@@ -12,5 +12,7 @@ public interface UserBlogService {
 		public int count(int userid);
 		//未登录页面显示最新10条博客
 		public List<Blog> findnewblog(int blogid);
+		//分页
+		public List<UserBlog> pagedquery(int userid,int offset,int pagesize);
 
 }
