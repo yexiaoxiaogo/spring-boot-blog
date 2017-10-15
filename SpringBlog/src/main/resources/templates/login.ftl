@@ -6,14 +6,21 @@
 	<#include "./common/head.ftl">
 	<style>
 		form.login {
-			width: 200px;
-			margin: 200px auto;
+    width: 300px;
+    margin: 200px auto;
+    padding: 40px;
+    box-shadow: 0 0 6px 1px #ccc;
+    border-radius: 5px;
 		}
+		form.login .btn {
+		    width: 100%;
+		   }
 	</style>
 </head>
 <body>
 	<#include "./common/header.ftl">
 	<form class="login" action='/login'>
+		<h5 class="text-center mb-4">登录账号</h5>
 		<div class='form-group'>
 			<input class="form-control" name="username" placeholder="请输入你的账号" />
 		</div>
