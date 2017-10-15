@@ -38,8 +38,12 @@ public class UserBlogSerciecImpl implements UserBlogService {
 		return userBlogDao.pagedquery(userid, offset,pagesize);
 	}
 	//搜索
-	public List<UserBlog> search(String keyword) {
+	public List<UserBlog> search(String keyword,int offset,int pagesize) {
 		
-		return userBlogDao.search(keyword);
+		return userBlogDao.search(keyword,offset,pagesize);
 	}
+	//根据关键字查询有几条blog
+		public int searchcount(String keyword){
+			return userBlogDao.searchcount(keyword);
+		}
 }

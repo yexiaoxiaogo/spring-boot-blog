@@ -28,7 +28,11 @@
 	
 	<!-- 搜索 -->
 	<select id="search" resultMap="BaseResultMap">
-		SELECT * FROM blog WHERE title LIKE '%#{keyword}%'
+		SELECT * FROM blog WHERE title LIKE "%"#{keyword}"%" ORDER BY blogid DESC LIMIT #{offset},#{pagesize}
+	</select>
+	<!-- 搜索后有几条数据 -->
+	<select id="searchcount" resultType="java.lang.Integer">
+		SELECT COUNT(* ) FROM blog WHERE title LIKE "%"#{keyword}"%"
 	</select>
 
 </mapper>

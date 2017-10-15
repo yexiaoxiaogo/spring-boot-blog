@@ -15,6 +15,8 @@ public interface UserBlogService {
 		//分页
 		public List<UserBlog> pagedquery(int userid,int offset,int pagesize);
 		//搜索
-		public List<UserBlog> search(String keyword);
+		public List<UserBlog> search(String keyword,int offset,int pagesize);
+		//根据关键字查询有几条blog
+		public int searchcount(String keyword);
 
 }
