@@ -13,7 +13,8 @@
 <body>
 	<#include "./common/header.ftl">
 	<div class="blog w980">
-		${blog}
+	<h3>${title}</h3>	
+	<div>${blog}</div>		
 	</div>
 </body>
 </html>

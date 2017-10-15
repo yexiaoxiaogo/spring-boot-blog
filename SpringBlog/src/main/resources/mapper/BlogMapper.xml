@@ -9,23 +9,24 @@
 		<result column="blog" property="blog" />
 		<result column="date" property="date" />
 	</resultMap>
-	
+
 	<parameterMap id="Blog"
 		type="io.github.yexiaoxiaogo.SpringBlog.domain.Blog" />
 	<!-- 查询单条记录 -->
-	<select id="findBlogByID" parameterType="java.lang.String"
+	<select id="findBlogByID" parameterType="int"
 		resultMap="BaseResultMap">
 		SELECT * FROM blog WHERE blogid = #{blogid}
 	</select>
-	
-		<!-- 查询列表 -->
-	<select id="findnewblog" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
-		SELECT * FROM blog ORDER BY blogid DESC LIMIT 10
+
+	<!-- 查询列表 -->
+	<select id="findnewblog" resultMap="BaseResultMap">
+		SELECT * FROM blog ORDER BY
+		blogid DESC LIMIT 10
 	</select>
-	
+
 	<insert id="insertBlog" parameterMap="Blog">
-		insert into blog(blogid,userid,title,blog,date) 
+		insert into
+		blog(blogid,userid,title,blog,date)
 		values(#{blogid},#{userid},#{title},#{blog},#{date})
 	</insert>
 </mapper>

@@ -46,20 +46,21 @@
         $('#publish').on('click', function() {
         		var editor = document.querySelector('#editor');
         		
-        		fetch('/test/api/post', {
+        		fetch('/write', {
         			method: 'post',
         			body: JSON.stringify({
             			blog: editor.firstChild.innerHTML,
             			title: editor.firstChild.firstChild && editor.firstChild.firstChild.innerText || '暂无标题',
             		}),
+            		credentials: "include",
             		headers: {
+       
             			'Content-Type': 'application/json'
             		}
         		}).then(function(r) {
         			return r.json();
         		}).then(function(d) {
-        			
-        			// location.href = '/abc'
+        			location.href = '/listed';
         		});
         });
     </script>

@@ -27,4 +27,5 @@ public interface UserBlogDao {
 	//搜索博文
 	List<UserBlog> search(@Param("keyword")String keyword,@Param("offset") int offset,@Param("pagesize")int pagesize);
 
+	
 }

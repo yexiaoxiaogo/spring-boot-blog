@@ -8,6 +8,7 @@ public class UserBlog {
 	private int userid;
 	private String username;
 	private String title;
+	private String blog;
 	private Date date;
 	public int getBlogid() {
 		return blogid;
@@ -38,6 +39,12 @@ public class UserBlog {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getBlog() {
+		return blog;
+	}
+	public void setBlog(String blog) {
+		this.blog = blog;
 	}
 	
 	

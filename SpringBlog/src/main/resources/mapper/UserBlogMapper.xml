@@ -8,6 +8,7 @@
 		<result column="userid" property="userid" />
 		<result column="username" property="username" />
 		<result column="title" property="title" />
+		<result column="blog" property="blog" />
 		<result column="date" property="date" />
 	</resultMap>
 
