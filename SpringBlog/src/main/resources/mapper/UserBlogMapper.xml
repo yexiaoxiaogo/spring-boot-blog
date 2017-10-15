@@ -11,7 +11,7 @@
 		<result column="date" property="date" />
 	</resultMap>
 
-	<!-- 查询列表 -->
+	<!-- 查询登录用户的主页博客列表 -->
 	<select id="selectALLByUserid" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
 		SELECT * FROM blog WHERE userid = #{userid}
@@ -25,6 +25,10 @@
 	<select id="pagedquery" resultMap="BaseResultMap">
 		SELECT * FROM blog WHERE userid=#{userid} ORDER BY blogid DESC LIMIT #{offset},#{pagesize}
 	</select>
-
+	
+	<!-- 搜索 -->
+	<select id="search" resultMap="BaseResultMap">
+		SELECT * FROM blog WHERE title LIKE '%#{keyword}%'
+	</select>
 
 </mapper>

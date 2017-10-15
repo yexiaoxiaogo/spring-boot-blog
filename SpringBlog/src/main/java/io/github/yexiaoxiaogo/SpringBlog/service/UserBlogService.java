@@ -14,5 +14,7 @@ public interface UserBlogService {
 		public List<Blog> findnewblog(int blogid);
 		//分页
 		public List<UserBlog> pagedquery(int userid,int offset,int pagesize);
+		//搜索
+		public List<UserBlog> search(String keyword);
 
 }

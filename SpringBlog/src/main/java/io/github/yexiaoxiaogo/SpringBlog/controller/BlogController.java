@@ -1,8 +1,6 @@
 package io.github.yexiaoxiaogo.SpringBlog.controller;
 
 
-import static org.mockito.Matchers.intThat;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,10 +61,10 @@ public class BlogController {
 	public Map<String , Object> paged(HttpServletRequest request){
 		//得到session信息
 	    HttpSession httpSession = request.getSession();
-	    ModelAndView modelAndView = new ModelAndView();
-	    
+	    //得到session信息中，登录账户的userid
 	    User  user = (User) httpSession.getAttribute("user");
 	    int userid = user.getUserid();
+	    
 	    int page = 0;
 	    int pagesize = 10;
 	
@@ -98,8 +96,9 @@ public class BlogController {
 	public ModelAndView listedPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		//得到session信息
 	    HttpSession httpSession = request.getSession();
-	    ModelAndView modelAndView = new ModelAndView();
 	    
+	    ModelAndView modelAndView = new ModelAndView();
+	    //得到session信息中的登录用户的userid，如果session失效，返回登录页面，程序进行登录
 	    User  user = (User) httpSession.getAttribute("user");
 	    if (user == null) {
 	    	response.sendRedirect("/login");
@@ -107,6 +106,7 @@ public class BlogController {
 	    }
 	    
 	    int userid = user.getUserid();
+	    //设置页数和每页显示条数的默认值
 	    int page = 0;
 	    int pagesize = 10;
 	
@@ -119,9 +119,7 @@ public class BlogController {
 	    	 pagesize = new Integer(request.getParameter("pagesize"));
 		}
 	    
-		int offset = page *pagesize;
-		
-		Map<String, Object>  result = new HashMap<String, Object>();
+		int offset = page *pagesize;		
 		
 		int count = userblogService.count(userid);
 	
@@ -135,5 +133,22 @@ public class BlogController {
 		return modelAndView;
 	}
 
+	//关键字搜索博客，返回list
+	/*
+	 * 因为list只显示title和date,所以关键字只在title里面查询，没有显示摘要暂时blog里面的关键字
+	 */
+	@RequestMapping("/search")
+	@ResponseBody
+	public Map<String, Object> search(HttpServletRequest request){
+		
+		Map<String, Object>  result = new HashMap<String, Object>();
+		
+		String keyword = new String(request.getParameter("keyword"));
+		
+		result.put("results", userblogService.search(keyword));
+	
+		return result;
+		
+	}
 
 }

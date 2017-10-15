@@ -20,5 +20,8 @@ public interface UserBlogDao {
 
 	// 分页
 	List<UserBlog> pagedquery(@Param("userid")int userid,@Param("offset") int offset,@Param("pagesize")int pagesize);
+	
+	//搜索博文
+	List<UserBlog> search(String keyword);
 
 }
