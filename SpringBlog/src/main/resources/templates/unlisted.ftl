@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>首页</title>
+<#include "./common/head.ftl">
 </head>
 <body>
-
+<#include "./common/header.ftl">
 </body>
 </html>

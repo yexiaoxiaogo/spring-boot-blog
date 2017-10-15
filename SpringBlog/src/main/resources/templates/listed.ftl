@@ -11,7 +11,7 @@
     min-height: 40px;
     }
   .footer span {
-  line-height: 40px;
+  	line-height: 40px;
   }
 </style>
 </head>
