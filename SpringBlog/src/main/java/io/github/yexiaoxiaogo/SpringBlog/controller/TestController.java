@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,11 +23,21 @@ import io.github.yexiaoxiaogo.SpringBlog.domain.Blog;
 public class TestController {
 	
 	// 模拟接口，所有数据返回 ok 对象
-	@RequestMapping("api")
+	@RequestMapping("/api")
 	@ResponseBody
-	public Map<String, String> api() {
+	public Map<String, String> api(HttpServletRequest request) {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("msg", "ok");
+		result.put("blog", request.getParameter("blog"));
+		return result;
+	}
+	
+	@RequestMapping("/api/post")
+	@ResponseBody
+	public Map<String, String> apiPost(@RequestBody Map<String, String> body) {
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("msg", "ok");
+		result.put("blog", body.get("blog"));
 		return result;
 	}
 	
@@ -46,9 +57,13 @@ public class TestController {
 	@RequestMapping("/listed")
 	public ModelAndView listed(HttpServletRequest request) {
 		
-		int page = new Integer(request.getParameter("page"));
 		ModelAndView modelAndView = new ModelAndView();
 		List<Blog> blogList = new LinkedList<Blog>();
+		
+		int page = 0;
+		if (request.getParameter("page") != null) {
+			page = new Integer(request.getParameter("page"));	
+		}
 		
 		int n = (page + 1) * 10;
 		for (int i = page * 10; i < n; i++) {
@@ -69,6 +84,38 @@ public class TestController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/search")
+	public ModelAndView search(HttpServletRequest request) {
+		
+		String keyword = request.getParameter("keyword");
+		ModelAndView modelAndView = new ModelAndView();
+		List<Blog> blogList = new LinkedList<Blog>();
+		
+		int page = 0;
+		if (request.getParameter("page") != null) {
+			page = new Integer(request.getParameter("page"));	
+		}
+		
+		int n = (page + 1) * 10;
+		for (int i = page * 10; i < n; i++) {
+			Blog blog = new Blog();
+			blog.setBlogid(i);
+			blog.setBlog("test" + i);
+			blog.setDate(new Date());
+			blog.setTitle("title" + i);
+			blogList.add(blog);
+		}
+		
+		modelAndView.addObject("keyword", keyword);
+		modelAndView.addObject("page", page);
+		modelAndView.addObject("pagesize", 10);
+		modelAndView.addObject("pages", 5);
+		modelAndView.addObject("total", 60);
+		modelAndView.addObject("results", blogList);
+		modelAndView.setViewName("search");
+		return modelAndView;
+	}
+	
 	// 测试链接：http://localhost:8080/test/unlisted
 	@RequestMapping("/unlisted")
 	public String unlisted() {
@@ -82,8 +129,12 @@ public class TestController {
 	}
 	
 	// 测试链接：http://localhost:8080/test/paper
-	@RequestMapping("/paper")
-	public String paper() {
-		return "paper";
+	@RequestMapping("/paper/{id}")
+	public ModelAndView paper(@PathVariable String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("title", "测试标题 [" + id + "]");
+		modelAndView.addObject("blog", "<h1>测试标题</h1><ul><li>111</li><li>22-22</li></ul>");
+		modelAndView.setViewName("paper");
+		return modelAndView;
 	}
 }

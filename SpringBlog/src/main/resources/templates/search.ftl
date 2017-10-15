@@ -7,7 +7,7 @@
 <style>
 	.footer {
 	    width: 938px;
-	    margin: 40px auto;
+	    margin: 0 auto 40px;
 	    min-height: 40px;
     }
 	  .footer span {
@@ -17,7 +17,7 @@
 </head>
 <body>
 	<#include "./common/header.ftl">
-
+	<h3 class='w980' style='padding-left: 20px;'>搜索关键词："${keyword}"，共搜索到${total}篇文章</h3>
 	<ul class="list-group" style="max-width: 980px; margin: 40px auto;">
 		<#list results as blog>
 		<li class="list-group-item border-0">
@@ -41,14 +41,13 @@
 		</#list>
 	</ul>
 	<div class="footer">
-		<span class="text-secondary">共${total}篇文章</span>
 		<nav class="float-right">
 			<ul class="pagination">
 				<#list 1..pages as i> <#if i== page>
 				<li class="page-item active"><a class="page-link"
 					href="?page=${i}">${i}</a></li>
 				<#else>
-				<li class="page-item "><a class="page-link" href="?page=${i}">${i}</a>
+				<li class="page-item "><a class="page-link" href="?keyword=${keyword}&page=${i}">${i}</a>
 				</li></#if> </#list>
 			</ul>
 		</nav>

@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>${title}</title>
+<#include "./common/head.ftl">
+<style>
+	.blog {
+		margin-top: 50px;
+	}
+</style>
 </head>
 <body>
-	<h3>文章详情页</h3>
+	<#include "./common/header.ftl">
+	<div class="blog w980">
+		${blog}
+	</div>
 </body>
 </html>

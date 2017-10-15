@@ -1,31 +1,29 @@
 <html>
 
-<head></head>
-
-<body>
-    <!-- Include stylesheet -->
+<head>
+	<title>写文章</title>
+	<#include "./common/head.ftl">
+	
     <link href="https://cdn.quilljs.com/1.3.3/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
-    <!-- Create the editor container -->
-    <div id="editor">
-        <p>Hello World!</p>
-        <p>Some initial
-            <strong>bold</strong> text</p>
-        <p>
-            <br>
-        </p>
-    </div>
+</head>
 
-    <!-- Include the Quill library -->
+<body>
+    <#include "./common/header.ftl">
+    <div class='w980 d-flex flex-column'>
+    		<button id='publish' class="btn btn-success mb-3 align-self-end">发布文章</button>
+    		<div id="editor"></div>
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.3/quill.js"></script>
 
-    <!-- Initialize Quill editor -->
     <script>
         // var fonts = ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'];
         hljs.configure({   // optionally configure hljs
             languages: ['javascript', 'ruby', 'python']
         });
+        
         var quill = new Quill('#editor', {
             modules: {
                 // 'formula': true,
@@ -43,6 +41,26 @@
                 ],
             },
             theme: 'snow'
+        });
+        
+        $('#publish').on('click', function() {
+        		var editor = document.querySelector('#editor');
+        		
+        		fetch('/test/api/post', {
+        			method: 'post',
+        			body: JSON.stringify({
+            			blog: editor.firstChild.innerHTML,
+            			title: editor.firstChild.firstChild && editor.firstChild.firstChild.innerText || '暂无标题',
+            		}),
+            		headers: {
+            			'Content-Type': 'application/json'
+            		}
+        		}).then(function(r) {
+        			return r.json();
+        		}).then(function(d) {
+        			
+        			// location.href = '/abc'
+        		});
         });
     </script>
 </body>
