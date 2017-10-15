@@ -56,9 +56,13 @@ public class TestController {
 	@RequestMapping("/listed")
 	public ModelAndView listed(HttpServletRequest request) {
 		
-		int page = new Integer(request.getParameter("page"));
 		ModelAndView modelAndView = new ModelAndView();
 		List<Blog> blogList = new LinkedList<Blog>();
+		
+		int page = 0;
+		if (request.getParameter("page") != null) {
+			page = new Integer(request.getParameter("page"));	
+		}
 		
 		int n = (page + 1) * 10;
 		for (int i = page * 10; i < n; i++) {
@@ -76,6 +80,38 @@ public class TestController {
 		modelAndView.addObject("total", 60);
 		modelAndView.addObject("results", blogList);
 		modelAndView.setViewName("listed");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/search")
+	public ModelAndView search(HttpServletRequest request) {
+		
+		String keyword = request.getParameter("keyword");
+		ModelAndView modelAndView = new ModelAndView();
+		List<Blog> blogList = new LinkedList<Blog>();
+		
+		int page = 0;
+		if (request.getParameter("page") != null) {
+			page = new Integer(request.getParameter("page"));	
+		}
+		
+		int n = (page + 1) * 10;
+		for (int i = page * 10; i < n; i++) {
+			Blog blog = new Blog();
+			blog.setBlogid(i);
+			blog.setBlog("test" + i);
+			blog.setDate(new Date());
+			blog.setTitle("title" + i);
+			blogList.add(blog);
+		}
+		
+		modelAndView.addObject("keyword", keyword);
+		modelAndView.addObject("page", page);
+		modelAndView.addObject("pagesize", 10);
+		modelAndView.addObject("pages", 5);
+		modelAndView.addObject("total", 60);
+		modelAndView.addObject("results", blogList);
+		modelAndView.setViewName("search");
 		return modelAndView;
 	}
 	
