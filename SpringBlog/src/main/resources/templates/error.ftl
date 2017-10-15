@@ -37,7 +37,7 @@
 <body class="centered">
   <div class="emoji"><img src="unicorn.gif" width=250></div>
   <p class="title">Ooooops!</p>
-  <p class="text">Looks like our server crashed 🙀<br>
-We're working on a quick fix, come back soon.</p>
+  <p class="text">我们的服务器貌似休息了 🙀<br>
+	我们会尽快修复滴~</p>
 </body>
 </html>

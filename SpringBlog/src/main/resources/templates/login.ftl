@@ -3,20 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>登录</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-	
+	<#include "./common/head.ftl">
 	<style>
-		form {
-			width: 200px;
-			margin: 200px auto;
+		form.login {
+    width: 300px;
+    margin: 200px auto;
+    padding: 40px;
+    box-shadow: 0 0 6px 1px #ccc;
+    border-radius: 5px;
 		}
+		form.login .btn {
+		    width: 100%;
+		   }
 	</style>
 </head>
 <body>
-	<form action='/login'>
+	<#include "./common/header.ftl">
+	<form class="login" action='/login'>
+		<h5 class="text-center mb-4">登录账号</h5>
 		<div class='form-group'>
 			<input class="form-control" name="username" placeholder="请输入你的账号" />
 		</div>

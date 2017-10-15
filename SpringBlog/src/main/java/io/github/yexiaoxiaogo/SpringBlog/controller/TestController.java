@@ -60,8 +60,11 @@ public class TestController {
 			blogList.add(blog);
 		}
 		
-		
-		modelAndView.addObject("list", blogList);
+		modelAndView.addObject("page", page);
+		modelAndView.addObject("pagesize", 10);
+		modelAndView.addObject("pages", 5);
+		modelAndView.addObject("total", 60);
+		modelAndView.addObject("results", blogList);
 		modelAndView.setViewName("listed");
 		return modelAndView;
 	}
