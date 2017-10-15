@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -128,8 +129,12 @@ public class TestController {
 	}
 	
 	// 测试链接：http://localhost:8080/test/paper
-	@RequestMapping("/paper")
-	public String paper() {
-		return "paper";
+	@RequestMapping("/paper/{id}")
+	public ModelAndView paper(@PathVariable String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("title", "测试标题 [" + id + "]");
+		modelAndView.addObject("blog", "<h1>测试标题</h1><ul><li>111</li><li>22-22</li></ul>");
+		modelAndView.setViewName("paper");
+		return modelAndView;
 	}
 }

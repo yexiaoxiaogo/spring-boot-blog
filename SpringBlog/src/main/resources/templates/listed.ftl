@@ -34,7 +34,7 @@
 							Someone famous in <cite title="Source Title">Source Title</cite>
 						</footer>
 					</blockquote>
-					<a class="float-right text-secondary" href='./paper?id=${blog.blogid}'>阅读详情 >></a>
+					<a class="float-right text-secondary" href='./paper/${blog.blogid}'>阅读详情 >></a>
 				</div>
 			</div>
 		</li>
