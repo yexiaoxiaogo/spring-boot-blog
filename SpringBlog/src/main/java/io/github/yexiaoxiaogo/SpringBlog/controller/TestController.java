@@ -22,11 +22,21 @@ import io.github.yexiaoxiaogo.SpringBlog.domain.Blog;
 public class TestController {
 	
 	// 模拟接口，所有数据返回 ok 对象
-	@RequestMapping("api")
+	@RequestMapping("/api")
 	@ResponseBody
-	public Map<String, String> api() {
+	public Map<String, String> api(HttpServletRequest request) {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("msg", "ok");
+		result.put("blog", request.getParameter("blog"));
+		return result;
+	}
+	
+	@RequestMapping("/api/post")
+	@ResponseBody
+	public Map<String, String> apiPost(@RequestBody Map<String, String> body) {
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("msg", "ok");
+		result.put("blog", body.get("blog"));
 		return result;
 	}
 	

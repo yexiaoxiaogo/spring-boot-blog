@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
 	<title>登录</title>
 	<#include "./common/head.ftl">
 	<style>
 		form.login {
-    width: 300px;
-    margin: 200px auto;
-    padding: 40px;
-    box-shadow: 0 0 6px 1px #ccc;
-    border-radius: 5px;
+		    width: 300px;
+		    margin: 200px auto;
+		    padding: 40px;
+		    box-shadow: 0 0 6px 1px #ccc;
+		    border-radius: 5px;
 		}
 		form.login .btn {
 		    width: 100%;
-		   }
+		}
 	</style>
 </head>
 <body>

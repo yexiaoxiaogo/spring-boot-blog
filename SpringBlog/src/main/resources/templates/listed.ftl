@@ -5,14 +5,14 @@
 <title>博客列表</title>
 <#include "./common/head.ftl">
 <style>
-.footer {
-    width: 938px;
-    margin: 40px auto;
-    min-height: 40px;
+	.footer {
+	    width: 938px;
+	    margin: 40px auto;
+	    min-height: 40px;
     }
-  .footer span {
-  	line-height: 40px;
-  }
+	  .footer span {
+	  	line-height: 40px;
+	  }
 </style>
 </head>
 <body>
