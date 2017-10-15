@@ -59,7 +59,7 @@ public class UserController {
 	}
 	
 	//点击退出按钮，跳转到未登录页面
-	@RequestMapping("/loginout")
+	@RequestMapping("/logout")
 	public String loginout(HttpServletRequest request){
 		//防止创建session
 		HttpSession httpSession = request.getSession(false);

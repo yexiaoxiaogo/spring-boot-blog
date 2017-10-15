@@ -128,6 +128,7 @@ public class BlogController {
 		modelAndView.addObject("pages", Math.ceil(count / pagesize) + 1);
 		modelAndView.addObject("total", count);
 		modelAndView.addObject("results", userBlogs);
+		modelAndView.addObject("user",user);
 		modelAndView.setViewName("listed");
 		return modelAndView;
 	}

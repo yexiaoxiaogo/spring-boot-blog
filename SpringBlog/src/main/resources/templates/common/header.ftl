@@ -21,6 +21,12 @@
 		  </li>
 		</ul>
 		
+		<#if user??>
+			<span>${user.username} <a href="/logout">登出</a></span>
+		<#else>
+			<span>请登录</span>
+		</#if>
+		
 		<form class="form-inline my-2 my-lg-0" action="/search">
 	      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="请输入文章关键词" aria-label="Search">
 	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
