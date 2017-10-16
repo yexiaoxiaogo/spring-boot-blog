@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,27 +71,29 @@ public class UserController {
 	}
 
 	// 点击注册按钮，跳转到注册用户页面，注册后跳转到未登录主页面，进行登录
-	@RequestMapping("/register")
-	public ModelAndView register(HttpServletRequest request) {
+	@RequestMapping(value = "/registerapi", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> registerapi(HttpServletRequest request,HttpServletResponse response, @RequestBody User user) {
 
 		// 创建User对象，表单获取user对象的user和password
-		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-
-		ModelAndView modelAndView = new ModelAndView();
-
+		User user1 = new User();
+		user1.setUsername(request.getParameter("username"));
+		user1.setPassword(request.getParameter("password"));
+		
 		// 插入数据库
-		userService.Register(user);
+		userService.Register(user1);
+		
+		Map<String, String> result = new HashMap<String, String>();
+		
+		result.put("username",user1.getUsername());
+		result.put("password",user1.getPassword());
+		
+		return result;
 
-		// 返回前端模板数据
-		if (user != null) {
-			modelAndView.addObject("user", user);
-			modelAndView.setViewName("unlisted");
-		}
-
-		return modelAndView;
-
+	}
+	@RequestMapping("/register")
+	public String register(){
+		return "register";
 	}
 	//
 

@@ -33,7 +33,8 @@
 			e.preventDefault();
 			e.stopPropagation()
 			
-			fetch('/test/api?' + $('form').serialize())
+			fetch('/registerapi?' + $('form').serialize())
+		//	fetch('/test/api?' + $('form').serialize())
 				.then(function(r) {
 					return r.json();
 				})

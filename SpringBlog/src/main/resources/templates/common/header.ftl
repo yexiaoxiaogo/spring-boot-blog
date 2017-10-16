@@ -24,7 +24,7 @@
 		<#if user??>
 			<span>${user.username} <a href="/logout">登出</a></span>
 		<#else>
-			<span>请登录</span>
+			<span> <a class="nav-link" href="/login">登录</a><a class="nav-link" href="/register">注册</a></span>
 		</#if>
 		
 		<form class="form-inline my-2 my-lg-0" action="/search">
