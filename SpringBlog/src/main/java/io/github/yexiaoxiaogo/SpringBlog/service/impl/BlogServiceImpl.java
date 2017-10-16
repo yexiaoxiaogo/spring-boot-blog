@@ -29,6 +29,7 @@ public class BlogServiceImpl implements BlogService {
 		boolean hasKey = redisTemplate.hasKey(key);
 		if(hasKey){
 			Blog blog = operations.get(key);
+			operations.set(key, blog, 5, TimeUnit.SECONDS);
 			System.out.println("是缓存中读取的");
 			return blog;
 		}
@@ -36,7 +37,7 @@ public class BlogServiceImpl implements BlogService {
 		Blog blog = blogDao.findBlogByID(blogid);
 		System.out.println("是数据库中读取的");
 		//operations.set(key, blog);
-		operations.set(key, blog, 10, TimeUnit.SECONDS);
+		operations.set(key, blog, 5, TimeUnit.SECONDS);
 		
 		return blog;
 	}
