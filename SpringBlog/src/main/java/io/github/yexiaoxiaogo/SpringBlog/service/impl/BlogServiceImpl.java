@@ -1,5 +1,6 @@
 package io.github.yexiaoxiaogo.SpringBlog.service.impl;
 
+import java.net.ConnectException;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,16 @@ public class BlogServiceImpl implements BlogService {
 	
 	//显示一篇博客,点击列表标题，打开一个新的链接，显示一篇博客,redis实现博客缓存
 	public Blog displayBlog(int blogid){
+		
+		//TODO: 判断redis是否连接
+		
 		//从缓存中读取博客信息
 		String key = String.valueOf(blogid);
 		ValueOperations<String, Blog> operations = redisTemplate.opsForValue();
-		
+			
 		//缓存存在则返回缓存中的内容
 		boolean hasKey = redisTemplate.hasKey(key);
+		
 		if(hasKey){
 			Blog blog = operations.get(key);
 			operations.set(key, blog, 5, TimeUnit.SECONDS);
