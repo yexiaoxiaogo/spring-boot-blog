@@ -15,6 +15,8 @@ public class UserBlogSerciecImpl implements UserBlogService {
 	
 	@Autowired
 	private UserBlogDao userBlogDao;
+
+	
 	//denglu主页显示博客列表
 	public List<UserBlog> findBlogListByUser(int userid){
 		
@@ -23,7 +25,7 @@ public class UserBlogSerciecImpl implements UserBlogService {
 	
 	//未登录主页面显示最新10条博客
 		public List<Blog> findnewblog(int blogid){
-			
+
 			return userBlogDao.findnewblog(blogid);
 		}
 	//

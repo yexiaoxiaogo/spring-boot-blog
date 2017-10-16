@@ -186,6 +186,7 @@ public class BlogController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		int blogid =Integer.parseInt(id);
+	//	int blogid =Integer.valueOf(id);
 		
 		Blog blog = blogService.displayBlog(blogid);
 		
