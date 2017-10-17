@@ -45,7 +45,7 @@
 				<li class="page-item active"><a class="page-link"
 					href="?page=${i}">${i}</a></li>
 				<#else>
-				<li class="page-item "><a class="page-link" href="?page=${i}">${i}</a>
+				<li class="page-item "><a class="page-link" href="?page=${i}&pagesize=${pagesize}">${i}</a>
 				</li></#if> </#list>
 			</ul>
 		</nav>

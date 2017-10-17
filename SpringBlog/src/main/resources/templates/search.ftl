@@ -24,6 +24,7 @@
 			<div class="card">
 				<div class="card-header">
 					${blog.title!"#暂无标题#"} 
+					<small>作者：${user.username}</small>
 					<small class="float-right">${blog.date?string("yyyy-MM-dd HH:mm:ss")}</small>
 				</div>
 				<div class="card-body">
@@ -37,11 +38,11 @@
 	<div class="footer">
 		<nav class="float-right">
 			<ul class="pagination">
-				<#list 1..(pages+1) as i> <#if i== page>
+				<#list 1..(pages) as i> <#if i== page>
 				<li class="page-item active"><a class="page-link"
 					href="?page=${i}">${i}</a></li>
 				<#else>
-				<li class="page-item "><a class="page-link" href="?keyword=${keyword}&page=${i}">${i}</a>
+				<li class="page-item "><a class="page-link" href="?keyword=${keyword}&page=${i}&pagesize=${pagesize}">${i}</a>
 				</li></#if> </#list>
 			</ul>
 		</nav>

@@ -21,7 +21,7 @@
 		</ul>
 		
 		<#if user??>
-			<span>${user.username} <a href="/logout">登出</a></span>
+			<span>${user.username} <a  class="mr-4 ml-2" href="/logout">登出</a></span>
 		<#else>
 			<span> <a class="btn-link mr-3" href="/login">登录</a><a class="btn-link mr-4" href="/register">注册</a></span>
 		</#if>
