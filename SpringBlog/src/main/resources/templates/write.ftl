@@ -12,6 +12,7 @@
     <#include "./common/header.ftl">
     <div class='w980 d-flex flex-column'>
     		<button id='publish' class="btn btn-success mb-3 align-self-end">发布文章</button>
+    		<input class="form-control" name="title" id="title" placeholder="请输入标题"/>
     		<div id="editor"></div>
     </div>
     
@@ -50,7 +51,7 @@
         			method: 'post',
         			body: JSON.stringify({
             			blog: editor.firstChild.innerHTML,
-            			title: editor.firstChild.firstChild && editor.firstChild.firstChild.innerText || '暂无标题',
+            			title: document.querySelector('#title').value,
             		}),
             		credentials: "include",
             		headers: {
@@ -60,6 +61,7 @@
         		}).then(function(r) {
         			return r.json();
         		}).then(function(d) {
+        			alert("发布成功")
         			location.href = '/listed';
         		});
         });

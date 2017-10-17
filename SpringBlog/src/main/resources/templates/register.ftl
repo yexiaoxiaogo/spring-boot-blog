@@ -18,16 +18,16 @@
 <body>
 	<form>
 		<div class='form-group'>
-			<input class="form-control" name="email" placeholder="请输入你的邮箱" />
+			<input class="form-control" name="username" id="username" placeholder="请输入你的用户名" />
 		</div>
 		<div class='form-group'>
-			<input type='password' class="form-control" name="password" placeholder="请输入你的密码" />
+			<input type='password' class="form-control" name="password" id="password" placeholder="请输入你的密码" />
 		</div>
 		<div class='form-group text-center'>
-			<button class='btn btn-primary'>注册</button>
+			<button class='btn btn-primary' id="register" >注册</button>
 		</div>
 	</form>
-	
+
 	<script>
 		$('form').on('submit', function(e) {
 			e.preventDefault();
@@ -44,5 +44,6 @@
 				});
 		});
 	</script>
+
 </body>
 </html>

@@ -7,7 +7,7 @@
 	<div class="collapse navbar-collapse" id="navbarToggler">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 		  <li class="nav-item">
-		    <a class="nav-link active" href="/unlisted">首页</a>
+		    <a class="nav-link" href="/unlisted">首页</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="/listed">我的文章</a>
@@ -23,7 +23,7 @@
 		<#if user??>
 			<span>${user.username} <a href="/logout">登出</a></span>
 		<#else>
-			<span> <a class="nav-link" href="/login">登录</a><a class="nav-link" href="/register">注册</a></span>
+			<span> <a class="btn-link mr-3" href="/login">登录</a><a class="btn-link mr-4" href="/register">注册</a></span>
 		</#if>
 		
 		<form class="form-inline my-2 my-lg-0" action="/search">
@@ -32,3 +32,10 @@
 	    </form>
     </div>
 </nav>
+<script>
+	Array.from(document.querySelectorAll('.nav-item')).map(ele => {
+		if (ele.querySelector('a').href == location.href) {
+			ele.classList.add('active');
+		}
+	});
+</script>
