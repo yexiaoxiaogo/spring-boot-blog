@@ -27,13 +27,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	// 显示未登录主页
-	@RequestMapping("/unlisted")
-	public String index(Model model) {
-		return "unlisted";
-	}
-	
-
 	// 点击登录按钮，跳转到登录页面,登录成功跳转到登录成功页面listed
 	@RequestMapping("/login")
 	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -59,18 +52,27 @@ public class UserController {
 
 		return modelAndView;
 	}
-	
-	//点击退出按钮，跳转到未登录页面
-	@RequestMapping("/logout")
-	public String loginout(HttpServletRequest request){
-		//防止创建session
-		HttpSession httpSession = request.getSession(false);
-		//清除session返回到未登录主页面
-		httpSession.removeAttribute("user");
-		return "unlisted";
-	}
+	//登出页面写到了blogcontroller里面去？不用
 
-	// 点击注册按钮，跳转到注册用户页面，注册后跳转到未登录主页面，进行登录
+	//点击退出按钮，跳转到未登录页面
+		@RequestMapping("/logout")
+		public String loginout(HttpServletRequest request){
+			//防止创建session
+			HttpSession httpSession = request.getSession(false);
+			//清除session返回到未登录主页面
+			httpSession.removeAttribute("user");
+			return "unlisted";
+		}
+	
+
+	/*	注册页面
+	 * 	 点击注册按钮，跳转到注册用户页面，注册后跳转到未登录主页面，进行登录
+	 */
+	@RequestMapping("/register")
+	public String register(){
+		return "register";
+	}
+	
 	@RequestMapping(value = "/registerapi", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> registerapi(HttpServletRequest request,HttpServletResponse response, @RequestBody User user) {
@@ -90,10 +92,6 @@ public class UserController {
 		
 		return result;
 
-	}
-	@RequestMapping("/register")
-	public String register(){
-		return "register";
 	}
 	//
 

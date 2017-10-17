@@ -22,7 +22,7 @@
 		SELECT COUNT(* ) FROM blog WHERE userid =#{userid}
 	</select>
 
-	<!--分页查询 -->
+	<!--listed分页查询 -->
 	<select id="pagedquery" resultMap="BaseResultMap">
 		SELECT * FROM blog WHERE userid=#{userid} ORDER BY blogid DESC LIMIT #{offset},#{pagesize}
 	</select>
@@ -35,5 +35,15 @@
 	<select id="searchcount" resultType="java.lang.Integer">
 		SELECT COUNT(* ) FROM blog WHERE title LIKE "%"#{keyword}"%"
 	</select>
+	
+		<!-- 查询一共有几条数据 -->
+	<select id="countAll" resultType="java.lang.Integer">
+		SELECT COUNT(* ) FROM blog 
+	</select>
+		<!--unlisetd分页查询 -->
+	<select id="allBlogPaged" resultMap="BaseResultMap">
+		SELECT * FROM blog ORDER BY blogid DESC LIMIT #{offset},#{pagesize}
+	</select>
+
 
 </mapper>

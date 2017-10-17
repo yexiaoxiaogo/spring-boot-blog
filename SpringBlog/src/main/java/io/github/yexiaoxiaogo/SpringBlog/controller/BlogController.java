@@ -58,7 +58,39 @@ public class BlogController {
 	// }
 	// return modelAndView;
 	// }
+	
+	//未登录页面
+	@RequestMapping("/unlisted")
+	public ModelAndView unlistedPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		// 设置页数和每页显示条数的默认值
+		int page = 0;
+		int pagesize = 10;
 
+		if (request.getParameter("page") != null) {
+			page = new Integer(request.getParameter("page")) - 1;
+		}
+
+		if (request.getParameter("pagesize") != null) {
+
+			pagesize = new Integer(request.getParameter("pagesize"));
+		}
+
+		int offset = page * pagesize;
+
+		int count = userblogService.countAll();
+
+		List<Blog> blogs = userblogService.allBlogPaged(offset, pagesize);
+		modelAndView.addObject("page", page + 1);
+		modelAndView.addObject("pagesize", pagesize);
+		modelAndView.addObject("pages", Math.ceil(count / pagesize) + 1);
+		modelAndView.addObject("total", count);
+		modelAndView.addObject("results", blogs);
+		modelAndView.setViewName("unlisted");
+		return modelAndView;
+	}
+//返回的JSON信息的接口
 	@RequestMapping("/api/listed")
 	@ResponseBody
 	public Map<String, Object> paged(HttpServletRequest request) {
