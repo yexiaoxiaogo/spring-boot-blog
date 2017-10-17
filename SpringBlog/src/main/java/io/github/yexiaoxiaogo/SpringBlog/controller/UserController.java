@@ -56,12 +56,14 @@ public class UserController {
 
 	//点击退出按钮，跳转到未登录页面
 		@RequestMapping("/logout")
-		public String loginout(HttpServletRequest request){
+		public String loginout(HttpServletRequest request,HttpServletResponse response) throws IOException{
 			//防止创建session
 			HttpSession httpSession = request.getSession(false);
 			//清除session返回到未登录主页面
 			httpSession.removeAttribute("user");
-			return "unlisted";
+			response.sendRedirect("/unlisted");
+			return null;
+		//	return "unlisted";
 		}
 	
 
