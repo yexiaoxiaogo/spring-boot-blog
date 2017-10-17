@@ -33,7 +33,7 @@ public class BlogController {
 	@Autowired
 	private UserBlogService userblogService;
 
-	// // 写博客，发布成功跳转到用户登录后主页面listed
+	// // 写博客，发布成功跳转到用户登录后主页面listed,要用post方法写博文发布
 	// @RequestMapping("/write")
 	// public ModelAndView writeBlog(HttpServletRequest request) {
 	//
@@ -127,6 +127,7 @@ public class BlogController {
 		return result;
 	}
 
+	//登录后，我的文章页面，listed
 	@RequestMapping("/listed")
 	public ModelAndView listedPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 得到session信息
