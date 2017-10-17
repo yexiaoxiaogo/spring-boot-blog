@@ -29,9 +29,6 @@
 		<div class='form-group text-center'>
 			<button class='btn btn-primary'>登录</button>
 		</div>
-		<div class='form-group text-right'>
-			<a class='' href='./register'>注册</a>
-		</div>
 	</form>
 </body>
 </html>

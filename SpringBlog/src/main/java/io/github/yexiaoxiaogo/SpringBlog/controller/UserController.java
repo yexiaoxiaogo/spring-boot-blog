@@ -75,22 +75,22 @@ public class UserController {
 		return "register";
 	}
 	
-	@RequestMapping(value = "/registerapi", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> registerapi(HttpServletRequest request,HttpServletResponse response, @RequestBody User user) {
+	public Map<String, String> registerapi(@RequestBody User user) {
 
 		// 创建User对象，表单获取user对象的user和password
-		User user1 = new User();
-		user1.setUsername(request.getParameter("username"));
-		user1.setPassword(request.getParameter("password"));
-		
+//		User user1 = new User();
+//		user1.setUsername(request.getParameter("username"));
+//		user1.setPassword(request.getParameter("password"));
+		System.out.println(user.getUsername());
 		// 插入数据库
-		userService.Register(user1);
+		userService.Register(user);
 		
 		Map<String, String> result = new HashMap<String, String>();
 		
-		result.put("username",user1.getUsername());
-		result.put("password",user1.getPassword());
+		result.put("username",user.getUsername());
+		result.put("password",user.getPassword());
 		
 		return result;
 

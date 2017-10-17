@@ -3,20 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>注册</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-	
+	<#include "./common/head.ftl">
 	<style>
-		form {
-			width: 200px;
-			margin: 200px auto;
+		form.register {
+		    width: 300px;
+		    margin: 200px auto;
+		    padding: 40px;
+		    box-shadow: 0 0 6px 1px #ccc;
+		    border-radius: 5px;
+		}
+		form.register .btn {
+		    width: 100%;
 		}
 	</style>
 </head>
 <body>
-	<form>
+<#include "./common/header.ftl">
+	<form class="register">
+	<h5 class="text-center mb-4">注册账号</h5>
 		<div class='form-group'>
 			<input class="form-control" name="username" id="username" placeholder="请输入你的用户名" />
 		</div>
@@ -32,9 +36,18 @@
 		$('form').on('submit', function(e) {
 			e.preventDefault();
 			e.stopPropagation()
-			
-			fetch('/registerapi?' + $('form').serialize())
-		//	fetch('/test/api?' + $('form').serialize())
+			fetch('/register', {
+        			method: 'post',
+        			body: JSON.stringify({
+            			username: document.querySelector('#username').value,
+            			password: document.querySelector('#password').value,
+            		}),
+            		credentials: "include",
+            		headers: {
+       
+            			'Content-Type': 'application/json'
+            		}
+        		})
 				.then(function(r) {
 					return r.json();
 				})
