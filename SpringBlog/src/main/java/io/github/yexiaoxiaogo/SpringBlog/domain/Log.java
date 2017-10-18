@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "logforJava")
 public class Log {
-
+	
+	@Id
 	private long id;
 	private int leavl; 
 	private String msg;

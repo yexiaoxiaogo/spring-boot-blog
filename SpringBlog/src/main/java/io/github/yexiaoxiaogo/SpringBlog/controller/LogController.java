@@ -17,8 +17,8 @@ public class LogController {
 	@Autowired
 	private LogRepository logRepository;
 	/*
-	 * TODO: 	@RequestMapping("/log" get)
-	 *			@RequestMapping("/log" post)
+	 * TODO: 	@RequestMapping("/log" get)查询，查看log
+	 *			@RequestMapping("/log" post)增加log，每次用户登陆和发布文章时，生成日志，并插入mongodb
 	 */
 
 	
