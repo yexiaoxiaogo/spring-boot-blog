@@ -79,10 +79,6 @@ public class UserController {
 	@ResponseBody
 	public Map<String, String> registerapi(@RequestBody User user) {
 
-		// 创建User对象，表单获取user对象的user和password
-//		User user1 = new User();
-//		user1.setUsername(request.getParameter("username"));
-//		user1.setPassword(request.getParameter("password"));
 		System.out.println(user.getUsername());
 		// 插入数据库
 		userService.Register(user);
