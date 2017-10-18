@@ -24,6 +24,9 @@ public interface UserBlogDao {
 	// 未登录主页显示最新10条博客
 	List<Blog> findnewblog(int blogid);
 	
+	//根据blogid查询username
+	String findNameByBlogid(int blogid);
+	
 	//发现主页文章列表分页
 	List<Blog> allBlogPaged(@Param("offset") int offset,@Param("pagesize")int pagesize);
 

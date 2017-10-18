@@ -222,9 +222,12 @@ public class BlogController {
 		// int blogid =Integer.valueOf(id);
 
 		Blog blog = blogService.displayBlog(blogid);
+		String username = userblogService.findNameByBlogid(blogid);
 
 		modelAndView.addObject("title", blog.getTitle());
 		modelAndView.addObject("blog", blog.getBlog());
+		modelAndView.addObject("username", username);
+		modelAndView.addObject("date", blog.getDate());
 		modelAndView.setViewName("paper");
 
 		return modelAndView;

@@ -59,4 +59,8 @@ public class UserBlogSerciecImpl implements UserBlogService {
 	public List<Blog> allBlogPaged(int offset,int pagesize){
 		return userBlogDao.allBlogPaged(offset, pagesize);
 	}
+	//根据blogid查询username
+	public String findNameByBlogid(int blogid){
+		return userBlogDao.findNameByBlogid(blogid);
+	}
 }

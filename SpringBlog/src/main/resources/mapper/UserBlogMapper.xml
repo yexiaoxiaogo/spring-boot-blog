@@ -44,6 +44,9 @@
 	<select id="allBlogPaged" resultMap="BaseResultMap">
 		SELECT * FROM blog ORDER BY blogid DESC LIMIT #{offset},#{pagesize}
 	</select>
-
+	<!--根据blogid来username-->
+	<select id="findNameByBlogid" resultType="java.lang.String">
+		SELECT `user`.username FROM `user`,blog WHERE blog.userid=`user`.userid AND blogid =#{blogid}
+	</select>
 
 </mapper>

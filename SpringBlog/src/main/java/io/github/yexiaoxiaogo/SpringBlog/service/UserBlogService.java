@@ -22,5 +22,7 @@ public interface UserBlogService {
 		public int countAll();
 		//unlisted分页
 		public List<Blog> allBlogPaged(int offset,int pagesize);
+		//根据blogid查询username
+		public String findNameByBlogid(int blogid);
 
 }
