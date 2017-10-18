@@ -22,7 +22,7 @@
 	<form class="register">
 	<h5 class="text-center mb-4">注册账号</h5>
 		<div class='form-group'>
-			<input class="form-control" name="username" id="username" placeholder="请输入你的用户名" />
+			<input class="form-control" name="username" id="username" placeholder="请输入你的用户名" onblur="check(this)" />
 		</div>
 		<div class='form-group'>
 			<input type='password' class="form-control" name="password" id="password" placeholder="请输入你的密码" />
@@ -57,6 +57,22 @@
 				});
 		});
 	</script>
+	<script type="text/javascript">
+		function check(input) {
+			//http://localhost:8080/username?username=119
+			fetch('/username?username=' + input.value).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				console.log(data);
+				if (data.code === 1) {
+					alert('用户名已被注册')
+					document.querySelector('#register').disabled = true;
+				} else {
+					document.querySelector('#register').disabled = false;
+				}
+			})
 
+		}
+	</script>
 </body>
 </html>
