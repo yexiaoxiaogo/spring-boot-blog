@@ -24,7 +24,6 @@
 			<div class="card">
 				<div class="card-header">
 					${blog.title!"#暂无标题#"} 
-					<small>作者：${user.username}</small>
 					<small class="float-right">${blog.date?string("yyyy-MM-dd HH:mm:ss")}</small>
 				</div>
 				<div class="card-body">
