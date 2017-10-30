@@ -13,7 +13,7 @@
 		    <a class="nav-link" href="/listed">我的文章</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="/weather">天气</a>
+		    <a class="nav-link" href="/test">天气</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="/write">写文章</a>

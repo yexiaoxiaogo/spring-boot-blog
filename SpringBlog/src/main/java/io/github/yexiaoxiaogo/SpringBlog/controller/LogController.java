@@ -14,7 +14,7 @@ import io.github.yexiaoxiaogo.SpringBlog.service.LogRepository;
 @Controller
 public class LogController {
 
-	@Autowired
+//	@Autowired
 	private LogRepository logRepository;
 	/*
 	 * TODO: 	@RequestMapping("/log" get)查询，查看log
@@ -32,7 +32,7 @@ public class LogController {
 		log.setLeavl(1);
 		log.setMsg("test log");
 //		logRepository.
-		logRepository.save(log);
+//		logRepository.save(log);
 		return "ok";
 	}
 }
