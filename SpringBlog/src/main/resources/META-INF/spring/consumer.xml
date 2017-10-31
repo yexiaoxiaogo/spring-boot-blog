@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-
+	<dubbo:application name="SpringBlog" />
 	<!-- 注册中心服务地址 -->
 	<dubbo:registry id="zookeeper" protocol="zookeeper"
-		address="${dubbo.registry.address}" />
+		address="localhost:2181" />
 
 	<!-- 引用weather服务 -->
-	<dubbo:reference id="WeatherService"
-		interface="io.github.yexiaoxiaogo.weather.service.WeatherService"
+	<dubbo:reference id="weatherCityService"
+		interface="io.github.yexiaoxiaogo.weather.service.WeatherCityService"
 		check="false" version="1.0" url="" registry="zookeeper" protocol="dubbo"
 		timeout="15000" />
 

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ import io.github.yexiaoxiaogo.SpringBlog.domain.User;
 import io.github.yexiaoxiaogo.SpringBlog.domain.UserBlog;
 import io.github.yexiaoxiaogo.SpringBlog.service.BlogService;
 import io.github.yexiaoxiaogo.SpringBlog.service.UserBlogService;
+import io.github.yexiaoxiaogo.weather.domain.WeatherCity;
+import io.github.yexiaoxiaogo.weather.service.WeatherCityService;
 
 @Controller
 public class BlogController {
@@ -32,6 +36,8 @@ public class BlogController {
 	private BlogService blogService;
 	@Autowired
 	private UserBlogService userblogService;
+	@Autowired
+	private WeatherCityService weatherCityService;
 
 	// // 写博客，发布成功跳转到用户登录后主页面listed,要用post方法写博文发布
 	// @RequestMapping("/write")
@@ -58,12 +64,12 @@ public class BlogController {
 	// }
 	// return modelAndView;
 	// }
-	
-	//未登录页面
+
+	// 未登录页面
 	@RequestMapping("/unlisted")
 	public ModelAndView unlistedPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		// 设置页数和每页显示条数的默认值
 		int page = 0;
 		int pagesize = 10;
@@ -90,7 +96,8 @@ public class BlogController {
 		modelAndView.setViewName("unlisted");
 		return modelAndView;
 	}
-//返回的JSON信息的接口
+
+	// 返回的JSON信息的接口
 	@RequestMapping("/api/listed")
 	@ResponseBody
 	public Map<String, Object> paged(HttpServletRequest request) {
@@ -127,7 +134,7 @@ public class BlogController {
 		return result;
 	}
 
-	//登录后，我的文章页面，listed
+	// 登录后，我的文章页面，listed
 	@RequestMapping("/listed")
 	public ModelAndView listedPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 得到session信息
@@ -259,7 +266,7 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String writeGet(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public String writeGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 得到session信息
 		HttpSession httpSession = request.getSession();
 
@@ -269,8 +276,17 @@ public class BlogController {
 			response.sendRedirect("/login");
 			return null;
 		}
-		
+
 		return "write";
 	}
-	
+
+	// weather
+	@RequestMapping("/weather/history")
+	public String test(ModelMap map) {
+		
+		List<WeatherCity> citys = weatherCityService.selectAll();
+		map.addAttribute("weatherlist", citys);
+		return "weather";
+	}
+
 }
