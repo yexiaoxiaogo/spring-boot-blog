@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import io.github.yexiaoxiaogo.SpringBlog.App;
 import io.github.yexiaoxiaogo.SpringBlog.domain.Blog;
 import io.github.yexiaoxiaogo.SpringBlog.domain.User;
 import io.github.yexiaoxiaogo.SpringBlog.domain.UserBlog;
 import io.github.yexiaoxiaogo.SpringBlog.service.BlogService;
 import io.github.yexiaoxiaogo.SpringBlog.service.UserBlogService;
 import io.github.yexiaoxiaogo.weather.domain.WeatherCity;
-import io.github.yexiaoxiaogo.weather.service.WeatherCityService;
+import io.github.yexiaoxiaogo.weather.service.WeatherCityConsumerService;
 
 @Controller
 public class BlogController {
@@ -36,8 +36,7 @@ public class BlogController {
 	private BlogService blogService;
 	@Autowired
 	private UserBlogService userblogService;
-	@Autowired
-	private WeatherCityService weatherCityService;
+
 
 	// // 写博客，发布成功跳转到用户登录后主页面listed,要用post方法写博文发布
 	// @RequestMapping("/write")
@@ -283,8 +282,8 @@ public class BlogController {
 	// weather
 	@RequestMapping("/weather/history")
 	public String test(ModelMap map) {
-		
-		List<WeatherCity> citys = weatherCityService.selectAll();
+		WeatherCityConsumerService bean = App.context.getBean(WeatherCityConsumerService.class);
+		List<WeatherCity> citys = bean.weatherCityService.selectAll();
 		map.addAttribute("weatherlist", citys);
 		return "weather";
 	}
